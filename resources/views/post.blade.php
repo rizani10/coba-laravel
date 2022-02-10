@@ -1,13 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="css/style.css">
-    <title>WPU - Blog | Post</title>
-</head>
-<body>
-    <h1>Halaman Post</h1>
-</body>
-</html>
+
+@extends('layouts.app')
+
+
+@section('content')
+    {{-- <article>
+        <h2>{{ $item["judul"] }}</h2>
+        <h5>{{ $item["author"] }}</h5>
+        <p>{{ $item["body"] }}</p>
+    </article> --}}
+
+    <a href="/blog" class="btn btn-primary">Kembali</a>
+@endsection

@@ -15,19 +15,30 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('home');
+    return view('home', [
+        'title' => 'Home'
+    ]);
 });
 
 Route::get('/about', function () {
     $data = [
+        'title' => 'About',
         "name" => 'Muhammad Faisal Rizani',
         "email" => 'faisalrizani@gmail.com',
         "img" => 'man.png'
-    ]; 
-    
+    ];
+
     return view('about', $data);
 });
 
+
 Route::get('/blog', function () {
-    return view('post');
+    
+
+    return view('posts', [
+        "title" => "Blog"
+
+    ]);
 });
+
+
