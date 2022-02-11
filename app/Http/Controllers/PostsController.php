@@ -18,11 +18,12 @@ class PostsController extends Controller
     }
 
     // create method single post
-    public function singlePost($slug)
+    // Post (Model)
+    public function singlePost(Post $post)
     {
         return view('post', [
             "title" => "Single Blog",
-            "post" => Post::find($slug)
+            "post" => $post
         ]);
     }
 }
