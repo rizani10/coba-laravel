@@ -8,5 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Post extends Model
 {
     use HasFactory;
-    protected $guarded = ['id'];
+    protected $guarded = ['id'];    //guarde jangan me edit id jdi filed yang lain bisa di esekusi
+
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 }
