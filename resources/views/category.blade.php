@@ -9,10 +9,10 @@
                 </h2>
 
                 <p>
-                    By : <a href="#" class="text-decoration-none">{{ $post->user->name }}</a>
+                    By : <a href="/authors/{{ $post->author->username }}" class="text-decoration-none">{{ $post->author->name }}</a>
                 </p>
 
-                <h5>{{ $post->author }}</h5>
+                {{-- <h5>{{ $post->author }}</h5> --}}
 
                 <p>{{ $post->excerpt }}</p>
             @endforeach
