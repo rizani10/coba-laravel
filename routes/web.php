@@ -1,9 +1,10 @@
 <?php
 
-use App\Http\Controllers\PostsController;
-use App\Models\Category;
 use App\Models\Post;
+use App\Models\User;
+use App\Models\Category;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PostsController;
 
 
 /*
@@ -61,5 +62,26 @@ Route::get('categories/{category:slug}', function(Category $category) {
         'title' => $category->name,
         'posts' => $category->posts,
         'category' => $category->name
+    ]);
+});
+
+
+
+// get data in authors
+Route::get('authors', function() {
+    $authors = User::all();
+    return view('authors', [
+        'title' => 'Authors Blog',
+        'authors' => $authors
+    ]);
+});
+
+
+
+// create route author yang membaut postingan
+Route::get('authors/{author:username}', function(User $author) {
+    return view('posts', [
+        'title' => $author->name,
+        'posts' => $author->posts,
     ]);
 });

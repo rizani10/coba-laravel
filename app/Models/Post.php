@@ -15,4 +15,10 @@ class Post extends Model
     {
         return $this->belongsTo(Category::class);
     }
+
+    // create fungsi untuk mengambil user yang membuat post
+    public function author()
+    {
+        return $this->belongsTo(User::class , 'user_id');
+    }
 }

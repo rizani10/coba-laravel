@@ -1,13 +1,13 @@
 @extends('layouts.app')
 @section('content')
-<h1 class="mb-5">Post categories</h1>
+<h1 class="mb-5">Authors Blog</h1>
     <article>
         <article class="mb-5">
-            @foreach ($categories as $category)
+            @foreach ($authors as $author)
                 <ul>
                     <li>
                         <h2>
-                            <a href="/categories/{{ $category->slug }}" class="text-decoration-none">{{ $category->name }}</a>
+                            <a href="/authors/{{ $author->username }}" class="text-decoration-none">{{ $author->name }}</a>
                         </h2>
                     </li>
                 </ul>
