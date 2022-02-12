@@ -46,7 +46,7 @@ Route::get('posts/{post:slug}', [PostsController::class, 'singlePost']);
 
 
 // halaman semua category
-Route::get('categories', function() {
+Route::get('categories', function () {
     $categories = Category::all();
     return view('categories', [
         'title' => 'Categories',
@@ -57,18 +57,20 @@ Route::get('categories', function() {
 
 
 // halaman categories berdasarkan slug
-Route::get('categories/{category:slug}', function(Category $category) {
-    return view('category', [
-        'title' => $category->name,
-        'posts' => $category->posts,
-        'category' => $category->name
+Route::get('categories/{category:slug}', function (Category $category) {
+    return view('posts', [
+        'title' => "Post by Category : $category->name",
+        'posts' => $category->posts->load([
+            'author',
+            'category'
+        ]),
     ]);
 });
 
 
 
 // get data in authors
-Route::get('authors', function() {
+Route::get('authors', function () {
     $authors = User::all();
     return view('authors', [
         'title' => 'Authors Blog',
@@ -79,9 +81,11 @@ Route::get('authors', function() {
 
 
 // create route author yang membaut postingan
-Route::get('authors/{author:username}', function(User $author) {
+Route::get('authors/{author:username}', function (User $author) {
     return view('posts', [
-        'title' => $author->name,
-        'posts' => $author->posts,
+        'title' => "Post By Author : $author->name",
+        'posts' => $author->posts->load([
+            'category', 'author'
+        ]),
     ]);
 });
