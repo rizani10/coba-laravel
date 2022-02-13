@@ -20,7 +20,8 @@ use App\Http\Controllers\PostsController;
 
 Route::get('/', function () {
     return view('home', [
-        'title' => 'Home'
+        'title' => 'Home',
+        'active' => 'home'
     ]);
 });
 
@@ -29,7 +30,8 @@ Route::get('/about', function () {
         'title' => 'About',
         "name" => 'Muhammad Faisal Rizani',
         "email" => 'faisalrizani@gmail.com',
-        "img" => 'man.png'
+        "img" => 'man.png',
+        'active' => 'about'
     ];
 
     return view('about', $data);
@@ -50,6 +52,7 @@ Route::get('categories', function () {
     $categories = Category::all();
     return view('categories', [
         'title' => 'Categories',
+        'active' => 'categories',
         'categories' => $categories
     ]);
 });
@@ -64,6 +67,7 @@ Route::get('categories/{category:slug}', function (Category $category) {
             'author',
             'category'
         ]),
+        'active' => 'categories',
     ]);
 });
 
@@ -74,7 +78,8 @@ Route::get('authors', function () {
     $authors = User::all();
     return view('authors', [
         'title' => 'Authors Blog',
-        'authors' => $authors
+        'authors' => $authors,
+        'active' => 'authors'
     ]);
 });
 
@@ -87,5 +92,6 @@ Route::get('authors/{author:username}', function (User $author) {
         'posts' => $author->posts->load([
             'category', 'author'
         ]),
+        'active' => 'authors',
     ]);
 });

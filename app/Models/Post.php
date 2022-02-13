@@ -10,6 +10,8 @@ class Post extends Model
     use HasFactory;
     protected $guarded = ['id'];    //guarde jangan me edit id jdi filed yang lain bisa di esekusi
 
+    // menambah fungsi agar datanya sudah di eager load
+    protected $with = ['author' , 'category'];
 
     public function category()
     {
