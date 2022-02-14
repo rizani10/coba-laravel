@@ -23,4 +23,36 @@ class Post extends Model
     {
         return $this->belongsTo(User::class , 'user_id');
     }
+
+    // create fungsi pencarian scope filter
+    public function scopeFilter($query , array $filters)
+    {
+        // if (isset($filters['search']) ? $filters['search'] : false) {
+        //     return $query->where('title', 'LIKE', '%' . $filters['search'] . '%')
+        //     ->orWhere('body', 'LIKE', '%' . $filters['search'] . '%');
+        // }
+
+        // memanfattkan fitur when laravel
+        $query->when($filters['search'] ?? false, function($query) use ($filters) {
+            return $query->where('title', 'LIKE', '%' . $filters['search'] . '%')
+            ->orWhere('body', 'LIKE', '%' . $filters['search'] . '%');
+        });
+
+        // cari filter berdasrkan name category
+        $query->when($filters['category'] ?? false, function($query, $category) {
+            return $query->whereHas('category', function($query) use ($category) {
+                $query->where('slug', $category);
+            });
+        });
+
+        // cari berdasarkan author
+        $query->when($filters['author'] ?? false, function($query, $author) {
+            return $query->whereHas('author', function($query) use ($author) {
+                $query->where('username', $author);
+            });
+        });
+
+    }
+
+
 }

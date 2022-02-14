@@ -40,7 +40,7 @@ Route::get('/about', function () {
 
 
 // blog
-Route::get('/blog', [PostsController::class, 'index']);
+Route::get('/posts', [PostsController::class, 'index']);
 
 
 // halaman single post
@@ -86,12 +86,12 @@ Route::get('authors', function () {
 
 
 // create route author yang membaut postingan
-Route::get('authors/{author:username}', function (User $author) {
-    return view('posts', [
-        'title' => "Post By Author : $author->name",
-        'posts' => $author->posts->load([
-            'category', 'author'
-        ]),
-        'active' => 'authors',
-    ]);
-});
+// Route::get('authors/{author:username}', function (User $author) {
+//     return view('posts', [
+//         'title' => "Post By Author : $author->name",
+//         'posts' => $author->posts->load([
+//             'category', 'author'
+//         ]),
+//         'active' => 'authors',
+//     ]);
+// });
