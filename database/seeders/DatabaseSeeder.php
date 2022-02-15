@@ -57,7 +57,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         // membuat post dengan factory
-        Post::factory(20)->create();
+        Post::factory(25)->create();
 
         // Post::create([
         //     'title' => 'Laravel 5.7',

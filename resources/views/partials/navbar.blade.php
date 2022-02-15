@@ -26,7 +26,11 @@
           <li class="nav-item">
             <a class="nav-link {{ ($active === 'authors') ? 'active' : '' }}" href="/authors">Authors Blog</a>
           </li>
-          
+        </ul>
+        <ul class="navbar-nav ms-auto">
+            <a href="/login" class="nav-link {{ ($active === 'login') ? 'active' : '' }}">
+              <i class="bi bi-box-arrow-in-right"></i> Login
+            </a>
         </ul>
       </div>
     </div>

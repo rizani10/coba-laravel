@@ -22,7 +22,7 @@
                     </article>
 
                 </article>
-                <a href="/blog" class="btn btn-primary mt-3">Kembali</a>
+                <a href="/posts" class="btn btn-primary mt-3">Kembali</a>
 
             </div>
         </div>

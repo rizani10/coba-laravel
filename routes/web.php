@@ -4,7 +4,9 @@ use App\Models\Post;
 use App\Models\User;
 use App\Models\Category;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PostsController;
+use App\Http\Controllers\RegisterController;
 
 
 /*
@@ -83,15 +85,11 @@ Route::get('authors', function () {
     ]);
 });
 
+// create route route buat login
+Route::get('/login' , [LoginController::class, 'index']);
 
+// create route route buat register
+Route::get('/register' , [RegisterController::class, 'index']);
 
-// create route author yang membaut postingan
-// Route::get('authors/{author:username}', function (User $author) {
-//     return view('posts', [
-//         'title' => "Post By Author : $author->name",
-//         'posts' => $author->posts->load([
-//             'category', 'author'
-//         ]),
-//         'active' => 'authors',
-//     ]);
-// });
+// create route method register
+Route::post('/register' , [RegisterController::class, 'store']);

@@ -20,7 +20,7 @@ class PostFactory extends Factory
             'excerpt' => $this->faker->text(mt_rand(40, 100)),
             'body' => '<p>' . implode('<p></p>' , $this->faker->paragraphs(mt_rand(20, 30))) . '</p>',
             'user_id' => mt_rand(1, 3),
-            'category_id' => mt_rand(1, 2),
+            'category_id' => mt_rand(1, 3),
         ];
     }
 }
