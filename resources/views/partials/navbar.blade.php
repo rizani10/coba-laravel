@@ -27,10 +27,40 @@
             <a class="nav-link {{ ($active === 'authors') ? 'active' : '' }}" href="/authors">Authors Blog</a>
           </li>
         </ul>
+
+        {{-- jika sudah login jangn tampilkan tulisan login --}}
         <ul class="navbar-nav ms-auto">
-            <a href="/login" class="nav-link {{ ($active === 'login') ? 'active' : '' }}">
-              <i class="bi bi-box-arrow-in-right"></i> Login
-            </a>
+          @auth
+
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Welcom back, {{ auth()->user()->name }}
+                  </a>
+                  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" href="/dashboard">
+                      <i class="bi bi-speedometer2"></i> My Dashboard</a>
+                    </li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li>
+
+                      {{-- form logout --}}
+                      <form action="/logout" method="POST">
+                        @csrf
+                        <button class="dropdown-item" type="submit">
+                          <i class="bi bi-power"></i> Logout
+                        </button>
+                      </form>
+                      
+                    </li>
+                  </ul>
+                </li>
+  
+              @else
+
+                <a href="/login" class="nav-link {{ ($active === 'login') ? 'active' : '' }}">
+                  <i class="bi bi-box-arrow-in-right"></i> Login
+                </a>
+          @endauth
         </ul>
       </div>
     </div>

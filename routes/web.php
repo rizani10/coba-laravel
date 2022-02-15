@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use App\Models\Post;
 use App\Models\User;
 use App\Models\Category;
@@ -85,11 +86,23 @@ Route::get('authors', function () {
     ]);
 });
 
-// create route route buat login
-Route::get('/login' , [LoginController::class, 'index']);
+// create route route buat login dengan middleware
+Route::get('/login' , [LoginController::class, 'index'])->name('login')->middleware('guest');
 
 // create route route buat register
-Route::get('/register' , [RegisterController::class, 'index']);
+Route::get('/register' , [RegisterController::class, 'index'])->middleware('guest');
 
 // create route method register
 Route::post('/register' , [RegisterController::class, 'store']);
+
+// create route method authenticate
+Route::post('/login' , [LoginController::class, 'authenticate']);
+
+
+// create dahboard dengan middleware
+Route::get('/dashboard' , [DashboardController::class , 'index'])->middleware('auth');
+
+
+// create route method logout
+Route::post('/logout' , [LoginController::class , 'logout']);
+
