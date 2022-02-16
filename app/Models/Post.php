@@ -55,4 +55,10 @@ class Post extends Model
     }
 
 
+    // setiap route otomatis mencari berdasarkan slug jgn id
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+
 }
