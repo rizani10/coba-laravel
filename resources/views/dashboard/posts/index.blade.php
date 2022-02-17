@@ -5,15 +5,17 @@
         <h1 class="h2">My Posts, {{ auth()->user()->name }}</h1>
     </div>
 
-    <a href="/dashboard/posts/create" class="btn btn-primary mb-3">Create new post</a>
+    <a href="/dashboard/posts/create" class="btn btn-primary mb-3"> <span data-feather="file-plus"></span> Create new post</a>
+
+    <a href="/" class="btn btn-secondary mb-3"><span data-feather="globe"></span> Visit Blog</a>
 
     {{-- pesan post baru berhasil ditambah --}}
     @if (session()->has('success'))
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-        {{ session()->get('success') }}
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-@endif
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ session()->get('success') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
 
     {{-- ambil semua data posts dalam bentuk tabel --}}
     <div class="table-responsive">
@@ -38,11 +40,19 @@
                             <a href="/dashboard/posts/{{ $post->slug }}" class="badge bg-info"> 
                                 <span data-feather="eye"></span>
                             </a>
-                            <a href="" class="badge bg-warning">
+
+                            <a href="/dashboard/posts/{{ $post->slug }}/edit" class="badge bg-warning">
                                 <span data-feather="edit"></span>
                             </a>
-                            <a href="" class="badge bg-danger">
-                                <span data-feather="trash"></span>
+
+                            <form action="/dashboard/posts/{{ $post->slug }}" method="POST" class="d-inline">
+                                {{-- request method bajak ke delete --}}
+                                @method('DELETE')
+                                {{-- token untuk menghindari CSRF --}}
+                                @csrf
+                                {{-- tombol hapus --}}
+                                <button class="badge bg-danger border-0" onclick="return confirm('Are you sure delete')"><span data-feather="trash"></span></button>
+                            </form>
                         </td>
                     </tr>
                 @endforeach

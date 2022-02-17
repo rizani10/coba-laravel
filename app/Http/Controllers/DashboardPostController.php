@@ -45,14 +45,24 @@ class DashboardPostController extends Controller
      */
     public function store(Request $request)
     {
+
+        
         //create validate data
         $validatedData = $request->validate([
             'title' => 'required|max:255',
             'slug' => 'required|unique:posts|max:255',
             'body' => 'required',
+            'image' => 'image|file|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'category_id' => 'required|exists:categories,id',
         ]);
 
+
+        // cek gambar jika tidak ada gambar yang di upload gunakan api unsplash
+        if ($request->file('image')) {
+            // maka buat validate dulu dan simpan image nya
+            $validatedData['image'] = $request->file('image')->store('post-images');
+        }
+        
         // ambil data id dan excerpt dulu
         $validatedData['user_id'] = auth()->user()->id;
         $validatedData['excerpt'] = Str::limit(strip_tags($request->body, 200));
@@ -84,21 +94,49 @@ class DashboardPostController extends Controller
      * @param  \App\Models\Posts  $posts
      * @return \Illuminate\Http\Response
      */
-    public function edit(Post $posts)
+    public function edit(Post $post)
     {
-        //
+        //tampilan view buat edit
+        return view('dashboard.posts.edit', [
+            'post' => $post,
+            'categories' => Category::all()
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Posts  $posts
+     * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Post $posts)
+    public function update(Request $request, Post $post)
     {
-        //
+        //bikin rules untuk validasi
+        $rules = [
+            'title' => 'required|max:255',
+            'body' => 'required',
+            'category_id' => 'required|exists:categories,id',
+        ];
+
+        // cek slug yang baru itu sama dengan slug yang lama jangan kasih validasi kalau berubah validasi
+        if($request->slug != $post->slug) {
+            $rules['slug'] = 'required|unique:posts';
+        }
+
+        // validate data rulesnya
+        $validatedData = $request->validate($rules);
+
+        // ambil data excerpt dan user id dulu
+        $validatedData['excerpt'] = Str::limit(strip_tags($request->body, 200));
+        $validatedData['user_id'] = auth()->user()->id;
+
+        // update data ke database
+        Post::where('id', $post->id)
+            ->update($validatedData);
+
+        // redirect ke halaman index sambil kirim pesan sukses
+        return redirect('/dashboard/posts')->with('success', 'Post has been updated');
     }
 
     /**
@@ -107,9 +145,13 @@ class DashboardPostController extends Controller
      * @param  \App\Models\Posts  $posts
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Post $posts)
+    public function destroy(Post $post)
     {
-        //
+        //delete data dari database
+        Post::destroy($post->id);
+
+        // redirect
+        return redirect('/dashboard/posts')->with('success', 'Post has been deleted');
     }
 
     // create function untuk tugas nya membuat slug
