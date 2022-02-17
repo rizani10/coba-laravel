@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
+use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
-    use HasFactory;
+    use HasFactory, Sluggable;
     protected $guarded = ['id'];    //guarde jangan me edit id jdi filed yang lain bisa di esekusi
 
     // menambah fungsi agar datanya sudah di eager load
@@ -59,6 +60,17 @@ class Post extends Model
     public function getRouteKeyName()
     {
         return 'slug';
+    }
+
+
+    // create function Sluggable untuk membuat slug otomatis
+    public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => 'title'
+            ]
+        ];
     }
 
 }

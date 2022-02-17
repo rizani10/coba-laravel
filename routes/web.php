@@ -108,11 +108,12 @@ Route::get('/dashboard' , function() {
 // create route method logout
 Route::post('/logout' , [LoginController::class , 'logout']);
 
+// bikin route ketiga ada dalam method get untuk slug
+Route::get('dashboard/posts/checkSlug', [DashboardPostController::class, 'checkSlug'])->middleware('auth');
 
 // create route menggunakan resource controller dengan middelware
 Route::resource('/dashboard/posts', DashboardPostController::class)->middleware('auth');
 
 
-// bikin route penimpa agar pakai slug
 
 

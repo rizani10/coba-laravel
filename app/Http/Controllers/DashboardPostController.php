@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use Illuminate\Support\Str;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Cviebrock\EloquentSluggable\Services\SlugService;
 
 class DashboardPostController extends Controller
 {
@@ -28,7 +31,10 @@ class DashboardPostController extends Controller
      */
     public function create()
     {
-        //
+        //form create post dan ambil data category
+        return view('dashboard.posts.create', [
+            'categories' => Category::all()
+        ]);
     }
 
     /**
@@ -39,7 +45,23 @@ class DashboardPostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //create validate data
+        $validatedData = $request->validate([
+            'title' => 'required|max:255',
+            'slug' => 'required|unique:posts|max:255',
+            'body' => 'required',
+            'category_id' => 'required|exists:categories,id',
+        ]);
+
+        // ambil data id dan excerpt dulu
+        $validatedData['user_id'] = auth()->user()->id;
+        $validatedData['excerpt'] = Str::limit(strip_tags($request->body, 200));
+
+        // insert data ke database
+        Post::create($validatedData);
+
+        // redirect ke halaman index sambi kirim pesan sukses
+        return redirect('/dashboard/posts')->with('success', 'New post has been created');
     }
 
     /**
@@ -88,5 +110,17 @@ class DashboardPostController extends Controller
     public function destroy(Post $posts)
     {
         //
+    }
+
+    // create function untuk tugas nya membuat slug
+    public function checkSlug(Request $request)
+    {
+        // ambil data service slug
+        $slug =SlugService::createSlug(Post::class, 'slug', $request->title);
+        
+        // balikkan data slug dalam bentuk json
+        return response()->json([
+            'slug' => $slug
+        ]);
     }
 }
