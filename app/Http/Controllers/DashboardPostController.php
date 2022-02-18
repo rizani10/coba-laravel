@@ -8,6 +8,7 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Cviebrock\EloquentSluggable\Services\SlugService;
+use Illuminate\Support\Facades\Storage;
 
 class DashboardPostController extends Controller
 {
@@ -116,6 +117,7 @@ class DashboardPostController extends Controller
         $rules = [
             'title' => 'required|max:255',
             'body' => 'required',
+            'image' => 'image|file|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'category_id' => 'required|exists:categories,id',
         ];
 
@@ -126,6 +128,16 @@ class DashboardPostController extends Controller
 
         // validate data rulesnya
         $validatedData = $request->validate($rules);
+
+         // cek gambar jika tidak ada gambar yang di upload gunakan api unsplash jik ada gambar yang lama hapus dlu
+        if ($request->file('image')) {
+            // jika gambar lama ada maka hapus
+            if($request->oldImage) {
+                Storage::delete($request->oldImage);
+            }
+            // maka buat validate dulu dan simpan image nya
+            $validatedData['image'] = $request->file('image')->store('post-images');
+        }
 
         // ambil data excerpt dan user id dulu
         $validatedData['excerpt'] = Str::limit(strip_tags($request->body, 200));
@@ -148,6 +160,10 @@ class DashboardPostController extends Controller
     public function destroy(Post $post)
     {
         //delete data dari database
+        // jika gambar lama ada maka hapus
+        if($post->image) {
+            Storage::delete($post->image);
+        }
         Post::destroy($post->id);
 
         // redirect

@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\AdminCategoryController;
 use App\Http\Controllers\DashboardPostController;
 
 
@@ -111,9 +112,13 @@ Route::post('/logout' , [LoginController::class , 'logout']);
 // bikin route ketiga ada dalam method get untuk slug
 Route::get('dashboard/posts/checkSlug', [DashboardPostController::class, 'checkSlug'])->middleware('auth');
 
+// bikin route ketiga ada dalam method get untuk slug
+Route::get('dashboard/categories/checkSlug', [AdminCategoryController::class, 'checkSlug'])->middleware('auth');
+
+
 // create route menggunakan resource controller dengan middelware
 Route::resource('/dashboard/posts', DashboardPostController::class)->middleware('auth');
 
-
-
+// create route category menggunakan resource controller
+Route::resource('/dashboard/categories', AdminCategoryController::class)->middleware('admin');
 

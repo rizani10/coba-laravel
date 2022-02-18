@@ -27,9 +27,9 @@
 
                 {{-- cek jika gambar terisi dari database --}}
                 @if ($post->image)
-                <div style="max-height: 350px; overflow:hidden;">
-                    <img src="{{ asset('storage/' . $post->image) }}" class="card-img-top mt-3" alt="{{ $post->title }}" class="img-fluid mb-3">
-                </div>
+                    <div style="max-height: 350px; overflow:hidden;">
+                        <img src="{{ asset('storage/' . $post->image) }}" class="card-img-top mt-3" alt="{{ $post->title }}" class="img-fluid mb-3">
+                    </div>
                 @else
                     <img src="https://source.unsplash.com/1200x400?{{ $post->category->name }}" class="card-img-top mt-3" alt="{{ $post->category->name }}" class="img-fluid">
                 @endif
@@ -39,7 +39,7 @@
                 </article>
 
             </article>
-            <a href="/posts" class="btn btn-primary mt-3">Kembali</a>
+            <a href="/dashboard/posts" class="btn btn-primary mb-3">Back</a>
 
     </div>
 </div>
