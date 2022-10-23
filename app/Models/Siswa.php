@@ -11,6 +11,8 @@ class Siswa extends Model
 
     protected $guarded = ['id'];
 
+    protected $with = ['kelas'];
+
 
     // relationship kelas
         public function kelas()

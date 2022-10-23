@@ -9,6 +9,7 @@ use App\Http\Controllers\PostsController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\AdminCategoryController;
 use App\Http\Controllers\DashboardPostController;
+use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\UserManajemenController;
 
 
@@ -130,6 +131,8 @@ Route::resource('/dashboard/posts', DashboardPostController::class)->middleware(
 Route::resource('/dashboard/categories', AdminCategoryController::class)->middleware('admin');
 
 Route::resource('/dashboard/users', UserManajemenController::class)->middleware('admin');
+
+Route::resource('/dashboard/siswa', SiswaController::class)->middleware('auth');
 
 
 
