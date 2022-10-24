@@ -1,13 +1,11 @@
 @extends('dashboard.layouts.main')
 
 @section('container')
-    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">My Posts, {{ auth()->user()->name }}</h1>
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-1 pb-1 mb-3 border-bottom">
+        <h1 class="h2">Data Siswa</h1>
     </div>
 
-    <a href="/dashboard/posts/create" class="btn btn-primary mb-3"> <span data-feather="file-plus"></span> Create new post</a>
-
-    <a href="/" class="btn btn-secondary mb-3"><span data-feather="globe"></span> Visit Blog</a>
+    <a href="/dashboard/siswa/create" class="btn btn-primary mb-5 "> <span data-feather="plus-circle"></span> Tambah</a>
 
     {{-- pesan post baru berhasil ditambah --}}
     @if (session()->has('success'))

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Kelas;
 use App\Models\Siswa;
 use Illuminate\Http\Request;
 
@@ -26,7 +27,10 @@ class SiswaController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.siswa.create', [
+            'kelas' => Kelas::all(),
+            'siswas' => Siswa::where('jns_kelamin')->get()
+        ]);
     }
 
     /**
@@ -37,7 +41,31 @@ class SiswaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // // buat validasi
+        $validatedData = $request->validate([
+            'kelas_id' => 'required',
+            'nis'=> 'required|numeric|unique:siswas',
+            'nisn'=> 'required|numeric|unique:siswas',
+            'nama'=> 'required',
+            'tempat_lahir'=> 'required|string',
+            'tgl_lahir'=> 'required|date',
+            'jns_kelamin'=> 'required',
+            'agama'=> 'required', 
+            'alamat'=> 'required',
+            'telp'=> 'required|numeric',
+            'email'=> 'required|email',
+            'nik'=> 'required|min:16',
+            'nama_ibu'=> 'required',
+            'nama_ayah'=> 'required',
+            'pekerjaan_ayah'=> 'required',
+            'pekerjaan_ibu'=> 'required',
+        ]);
+
+        // insert
+        Siswa::create($validatedData);
+
+         // redirect ke halaman index sambi kirim pesan sukses
+        return redirect('/dashboard/siswa')->with('success', 'Data siswa berhasil ditambah');
     }
 
     /**

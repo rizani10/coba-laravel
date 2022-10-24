@@ -14,8 +14,8 @@ class SiswaFactory extends Factory
     public function definition()
     {
         return [
-            'nis' => $this->faker->randomNumber(),
-            'nisn' => $this->faker->randomNumber(),
+            'nis' => $this->faker->unique()->randomNumber(),
+            'nisn' => $this->faker->unique()->randomNumber(),
             'nama' =>$this->faker->name(),
             'tempat_lahir' => $this->faker->city(),
             'tgl_lahir' => $this->faker->date(),

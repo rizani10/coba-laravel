@@ -26,46 +26,46 @@ class DatabaseSeeder extends Seeder
 
 
         // seeding
-        // User::create([
-        //     'name' => 'Muhammad Faisal Rizani',
-        //     'username' => 'Rizani12',
-        //     'email' => 'faisalrizani12@gmail.com',
-        //     'password' => bcrypt('12345678'),
-        //     'is_admin' => 1
-        // ]);
+        User::create([
+            'name' => 'Muhammad Faisal Rizani',
+            'username' => 'Rizani12',
+            'email' => 'faisalrizani12@gmail.com',
+            'password' => bcrypt('12345678'),
+            'is_admin' => 1
+        ]);
 
-        // Kelas::create([
-        //     'nama_kelas' => 'VII'
-        // ]);
-        // Kelas::create([
-        //     'nama_kelas' => 'VIII'
-        // ]);
-        // Kelas::create([
-        //     'nama_kelas' => 'IX'
-        // ]);
+        Kelas::create([
+            'nama_kelas' => 'VII'
+        ]);
+        Kelas::create([
+            'nama_kelas' => 'VIII'
+        ]);
+        Kelas::create([
+            'nama_kelas' => 'IX'
+        ]);
 
-        // User::factory(3)->create();
+        User::factory(3)->create();
 
-        // Category::create([
-        //     'name' => 'Web Programming',
-        //     'slug' => 'web-programming',
+        Category::create([
+            'name' => 'Web Programming',
+            'slug' => 'web-programming',
 
-        // ]);
+        ]);
 
-        // Category::create([
-        //     'name' => 'Web Desain',
-        //     'slug' => 'web-desain',
+        Category::create([
+            'name' => 'Web Desain',
+            'slug' => 'web-desain',
 
-        // ]);
+        ]);
 
-        // Category::create([
-        //     'name' => 'Personal',
-        //     'slug' => 'personal',
+        Category::create([
+            'name' => 'Personal',
+            'slug' => 'personal',
 
-        // ]);
+        ]);
 
         // membuat post dengan factory
-        // Post::factory(100)->create();
+        Post::factory(100)->create();
 
         Siswa::factory(200)->create();
 
