@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
+use PhpParser\Node\Stmt\Foreach_;
 
 class PostsController extends Controller
 {
@@ -52,7 +53,7 @@ class PostsController extends Controller
             // "title" => "Single Blog",
             "post" => $post,
             "active" => 'posts',
-            "posts" => Post::latest()->paginate(5)
+            "posts" => Post::latest()->filter(request(['search', 'category', 'author']))->paginate(7),
         ]);
     }
 
