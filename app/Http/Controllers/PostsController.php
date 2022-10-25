@@ -26,11 +26,19 @@ class PostsController extends Controller
         }
 
 
-        return view('posts', [
+        // return view('posts', [
+        //     "title" => "All Posts" . $title,
+        //     "active" => 'posts',
+        //     // "posts" => Post::all()
+        //     // membuat postingan terbaru
+        //     "posts" => Post::latest()->filter(request(['search', 'category', 'author']))->paginate(7)
+        // ]);
+
+        return view('home.blog',[
             "title" => "All Posts" . $title,
             "active" => 'posts',
-            // "posts" => Post::all()
-            // membuat postingan terbaru
+            // // "posts" => Post::all()
+            // // membuat postingan terbaru
             "posts" => Post::latest()->filter(request(['search', 'category', 'author']))->paginate(7)
         ]);
         
@@ -40,10 +48,11 @@ class PostsController extends Controller
     // Post (Model)
     public function singlePost(Post $post)
     {
-        return view('post', [
-            "title" => "Single Blog",
+        return view('home.detail-blog', [
+            // "title" => "Single Blog",
+            "post" => $post,
             "active" => 'posts',
-            "post" => $post
+            "posts" => Post::latest()->paginate(5)
         ]);
     }
 

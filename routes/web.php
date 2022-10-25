@@ -24,8 +24,15 @@ use App\Http\Controllers\UserManajemenController;
 |
 */
 
-Route::get('/', function () {
-    return view('home', [
+// Route::get('/', function () {
+//     return view('home', [
+//         'title' => 'Home',
+//         'active' => 'home'
+//     ]);
+// });
+
+Route::get('/', function(){
+    return view('home.layout.app',[
         'title' => 'Home',
         'active' => 'home'
     ]);

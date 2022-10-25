@@ -10,7 +10,7 @@
             <form method="POST" action="/dashboard/posts" class="mb-5" enctype="multipart/form-data">
                 @csrf
                 <div class="mb-3">
-                    <label for="title" class="form-label">Title</label>
+                    <label for="title" class="form-label">Judul</label>
                     <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" name="title" value="{{ old('title') }}">
                     @error('title')
                         <div class="invalid-feedback">
@@ -21,7 +21,7 @@
                 
                 <div class="mb-3">
                     <label for="slug" class="form-label">Slug</label>
-                    <input type="text" class="form-control @error('slug') is-invalid @enderror" id="slug" name="slug" value="{{ old('slug') }}">
+                    <input type="text" class="form-control @error('slug') is-invalid @enderror" id="slug" name="slug" value="{{ old('slug') }}" readonly>
                     @error('slug')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -30,7 +30,7 @@
                 </div>
                 
                 <div class="mb-3">
-                    <label for="category_id" class="form-label">Category</label>
+                    <label for="category_id" class="form-label">Kategori Berita</label>
                     <select name="category_id" id="category_id" class="form-control">
                         @foreach ($categories as $category)
                         @if (old('category_id') == $category->id)
@@ -45,7 +45,7 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="image" class="form-label">Posts Images</label>
+                    <label for="image" class="form-label">Foto Berita</label>
                     <img src="" class="img-preview img-fluid mb-3 col-sm-5" alt="">
                     <input class="form-control @error('image') is-invalid @enderror" type="file" id="image" name="image" onchange="previewImage()">
                     @error('image')
@@ -56,7 +56,7 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="body" class="form-label">Body</label>
+                    <label for="body" class="form-label">Isi Berita</label>
                     @error('body')
                         <p class="text-danger"> {{ $message }} </p>
                     @enderror
