@@ -27,6 +27,7 @@ class SiswaFactory extends Factory
             'nik' => $this->faker->randomNumber(),
             'nama_ibu' =>$this->faker->name(),
             'nama_ayah'=>$this->faker->name(),
+            'telp_ortu' => $this->faker->phoneNumber(),
             'pekerjaan_ayah' => $this->faker->jobTitle(),
             'pekerjaan_ibu' => $this->faker->jobTitle(),
             'kelas_id' => mt_rand(1, 3)

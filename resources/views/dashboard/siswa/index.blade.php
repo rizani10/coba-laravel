@@ -16,35 +16,46 @@
     @endif
 
     {{-- ambil semua data posts dalam bentuk tabel --}}
-    <div class="table-responsive">
-        <table class="table table-striped table-sm table-bordered" id="example">
-            <thead>
-                <tr>
-                <th scope="col">#</th>
-                <th scope="col">Kelas</th>
-                <th scope="col">NISN</th>
-                <th scope="col">Nama</th>
-                <th scope="col">Tempat Lahir</th>
-                <th scope="col">Tanggal Lahir</th>
-                <th scope="col">Nama Ibu</th>
-                <th scope="col">Aksi</th>
-                </tr>
-            </thead>
-            <tbody>
-              @foreach ($siswas as $siswa)
-                  <tr>
-                    <td>{{ $loop->iteration }}</td>
-                    <td>{{ $siswa->kelas->nama_kelas }}</td>
-                    <td>{{ $siswa->nisn }}</td>
-                    <td>{{ $siswa->nama }}</td>
-                    <td>{{ $siswa->tempat_lahir }}</td>
-                    <td>{{ $siswa->tgl_lahir }}</td>
-                    <td>{{ $siswa->nama_ibu }}</td>
-                    <td>Aksi</td>
-                  </tr>
-              @endforeach
-            </tbody>
-        </table>
+    <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered" id="example">
+                        <thead>
+                            <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Kelas</th>
+                            <th scope="col">NISN</th>
+                            <th scope="col">Nama</th>
+                            <th scope="col">Tempat Lahir</th>
+                            <th scope="col">Tanggal Lahir</th>
+                            <th scope="col">Nama Ibu</th>
+                            <th scope="col">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($siswas as $siswa)
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $siswa->kelas->nama_kelas }}</td>
+                                    <td>{{ $siswa->nisn }}</td>
+                                    <td>{{ $siswa->nama }}</td>
+                                    <td>{{ $siswa->tempat_lahir }}</td>
+                                    <td>{{ $siswa->tgl_lahir }}</td>
+                                    <td>{{ $siswa->nama_ibu }}</td>
+                                    <td>
+                                        <a href="/dashboard/siswa/{{ $siswa->id }}/edit" class="badge bg-warning">
+                                            <span data-feather="edit"></span>
+                                        </a>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
     
+
+
 @endsection

@@ -16,7 +16,7 @@ class SiswaController extends Controller
     public function index()
     {
         return view('dashboard.siswa.index', [
-            'siswas' => Siswa::all()
+            'siswas' => Siswa::latest()->get()
         ]);
     }
 
@@ -29,7 +29,6 @@ class SiswaController extends Controller
     {
         return view('dashboard.siswa.create', [
             'kelas' => Kelas::all(),
-            'siswas' => Siswa::where('jns_kelamin')->get()
         ]);
     }
 
@@ -87,7 +86,10 @@ class SiswaController extends Controller
      */
     public function edit(Siswa $siswa)
     {
-        //
+        return view('dashboard.siswa.edit', [
+            'siswa' => $siswa,
+            'kelas' => Kelas::all(),
+        ]);
     }
 
     /**

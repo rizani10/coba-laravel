@@ -21,7 +21,7 @@ class DashboardPostController extends Controller
     {
         // kirim data dari database ke view berdasarkan postingan user
         return view('dashboard.posts.index', [
-            'posts' => Post::where('user_id', auth()->user()->id)->get()
+            'posts' => Post::latest()->where('user_id', auth()->user()->id)->get()
         ]);
     }
 

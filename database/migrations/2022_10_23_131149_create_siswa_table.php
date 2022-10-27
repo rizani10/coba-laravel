@@ -29,6 +29,7 @@ class CreateSiswaTable extends Migration
             $table->string('nik');
             $table->string('nama_ibu');
             $table->string('nama_ayah');
+            $table->string('telp_ortu');
             $table->string('pekerjaan_ayah');
             $table->string('pekerjaan_ibu');
             $table->timestamps();
