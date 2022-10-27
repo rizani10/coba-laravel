@@ -27,6 +27,7 @@ class Siswa extends Model
             'nama_ayah',
             'pekerjaan_ayah',
             'pekerjaan_ibu',
+            'telp_ortu'
     ];
 
     protected $with = ['kelas'];

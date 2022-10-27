@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Kelas;
-use App\Http\Requests\StoreKelasRequest;
-use App\Http\Requests\UpdateKelasRequest;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class KelasController extends Controller
 {
@@ -15,7 +15,9 @@ class KelasController extends Controller
      */
     public function index()
     {
-        //
+        return view('dashboard.kelas.index',[
+            'kelas' => Kelas::all()
+        ]);
     }
 
     /**
@@ -34,9 +36,17 @@ class KelasController extends Controller
      * @param  \App\Http\Requests\StoreKelasRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreKelasRequest $request)
+    public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'nama_kelas' => 'required'
+        ]);
+
+        // insert
+        Kelas::create($validatedData);
+
+        // redirect ke halaman index sambi kirim pesan sukses
+        return redirect('/dashboard/kelas')->with('success', 'Data kelas berhasil ditambah');
     }
 
     /**
@@ -68,7 +78,7 @@ class KelasController extends Controller
      * @param  \App\Models\Kelas  $kelas
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateKelasRequest $request, Kelas $kelas)
+    public function update(Request $request, Kelas $kelas)
     {
         //
     }

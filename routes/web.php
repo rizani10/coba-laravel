@@ -3,13 +3,15 @@
 use App\Models\Post;
 use App\Models\User;
 use App\Models\Category;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PostsController;
+use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\AdminCategoryController;
 use App\Http\Controllers\DashboardPostController;
-use App\Http\Controllers\SiswaController;
+use App\Http\Controllers\KelasController;
 use App\Http\Controllers\UserManajemenController;
 
 
@@ -140,6 +142,9 @@ Route::resource('/dashboard/categories', AdminCategoryController::class)->middle
 Route::resource('/dashboard/users', UserManajemenController::class)->middleware('admin');
 
 Route::resource('/dashboard/siswa', SiswaController::class)->middleware('auth');
+
+Route::resource('/dashboard/kelas', KelasController::class)->middleware('auth');
+
 
 
 

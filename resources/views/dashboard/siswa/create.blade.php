@@ -92,7 +92,7 @@
 
             <div class="col-md-4">
               <label for="alamat" class="form-label">Alamat</label>
-              <textarea name="alamat" id="alamat" cols="10" rows="1" required class="form-control @error('alamat') is-invalid @enderror" value="{{ old('alamat') }}"></textarea>
+              <input name="alamat" id="alamat" cols="10" rows="1" required class="form-control @error('alamat') is-invalid @enderror" value="{{ old('alamat') }}">
               @error('alamat')
                   <div class="invalid-feedback">
                     {{ $message }}
@@ -130,7 +130,7 @@
               @enderror
             </div>
 
-            <div class="col-md-6">
+            <div class="col-md-4">
               <label for="nama_ibu" class="form-label">Nama Ibu</label>
               <input type="text" class="form-control @error('nama_ibu') is-invalid @enderror" id="nama_ibu" name="nama_ibu" required value="{{ old('nama_ibu') }}">
               @error('nama_ibu')
@@ -139,10 +139,20 @@
                   </div>
               @enderror
             </div>
-            <div class="col-md-6">
+            <div class="col-md-4">
               <label for="nama_ayah" class="form-label">Nama Ayah</label>
               <input type="text" class="form-control @error('nama_ayah') is-invalid @enderror" id="nama_ayah" name="nama_ayah" required value="{{ old('nama_ayah') }}">
               @error('nama_ayah')
+                  <div class="invalid-feedback">
+                    {{ $message }}
+                  </div>
+              @enderror
+            </div>
+
+            <div class="col-md-4">
+              <label for="telp_ortu" class="form-label">Nomor HP Orang Tua</label>
+              <input type="number" class="form-control @error('telp_ortu') is-invalid @enderror" id="telp_ortu" name="telp_ortu" required value="{{ old('telp_ortu') }}">
+              @error('telp_ortu')
                   <div class="invalid-feedback">
                     {{ $message }}
                   </div>

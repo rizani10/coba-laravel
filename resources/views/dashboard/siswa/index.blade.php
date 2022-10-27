@@ -5,7 +5,9 @@
         <h1 class="h2">Data Siswa</h1>
     </div>
 
-    <a href="/dashboard/siswa/create" class="btn btn-primary mb-5 "> <span data-feather="plus-circle"></span> Tambah</a>
+    <a href="/dashboard/siswa/create" class="btn btn-primary mb-3"> <span data-feather="plus-circle"></span> Tambah</a>
+    
+    
 
     {{-- pesan post baru berhasil ditambah --}}
     @if (session()->has('success'))
@@ -17,6 +19,9 @@
 
     {{-- ambil semua data posts dalam bentuk tabel --}}
     <div class="card">
+        <div class="card-header">
+            Tabel Data Siswa
+        </div>
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-striped table-bordered" id="example">
@@ -46,6 +51,13 @@
                                         <a href="/dashboard/siswa/{{ $siswa->id }}/edit" class="badge bg-warning">
                                             <span data-feather="edit"></span>
                                         </a>
+                                        <form action="/dashboard/siswa/{{ $siswa->id }}" method="post" class="d-inline">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="badge bg-danger border-0" onclick="return confirm('Yakin ingin menghapus data')">
+                                                <span data-feather="trash"></span>
+                                            </button>
+                                        </form>
                                     </td>
                                 </tr>
                             @endforeach

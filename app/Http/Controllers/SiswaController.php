@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Kelas;
 use App\Models\Siswa;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class SiswaController extends Controller
 {
@@ -58,6 +59,7 @@ class SiswaController extends Controller
             'nama_ayah'=> 'required',
             'pekerjaan_ayah'=> 'required',
             'pekerjaan_ibu'=> 'required',
+            'telp_ortu' => 'required'
         ]);
 
         // insert
@@ -101,7 +103,32 @@ class SiswaController extends Controller
      */
     public function update(Request $request, Siswa $siswa)
     {
-        //
+        // buat validasi
+        $validatedData = $request->validate([
+            'kelas_id' => 'required',
+            'nis'=> 'required|numeric',
+            'nisn'=> 'required|numeric',
+            'nama'=> 'required',
+            'tempat_lahir'=> 'required|string',
+            'tgl_lahir'=> 'required|date',
+            'jns_kelamin'=> 'required',
+            'agama'=> 'required', 
+            'alamat'=> 'required',
+            'telp'=> 'required|numeric',
+            'email'=> 'required|email',
+            'nik'=> 'required|min:16',
+            'nama_ibu'=> 'required',
+            'nama_ayah'=> 'required',
+            'pekerjaan_ayah'=> 'required',
+            'pekerjaan_ibu'=> 'required',
+            'telp_ortu' => 'required'
+        ]);
+
+        Siswa::where('id', $siswa->id)
+                ->update($validatedData);
+
+             // redirect ke halaman index sambi kirim pesan sukses
+        return redirect('/dashboard/siswa')->with('success', 'Data siswa berhasil diubah');
     }
 
     /**
@@ -112,6 +139,19 @@ class SiswaController extends Controller
      */
     public function destroy(Siswa $siswa)
     {
-        //
+        // delete data
+        Siswa::destroy($siswa->id);
+
+             // redirect ke halaman index sambi kirim pesan sukses
+            return redirect('/dashboard/siswa')->with('success', 'Data siswa berhasil dihapus');
+    }
+
+
+    public function deleteAll()
+    {
+        DB::table('siswas')->delete();
+
+         // redirect ke halaman index sambi kirim pesan sukses
+         return redirect('/dashboard/siswa')->with('success', 'Data siswa berhasil dihapus');
     }
 }

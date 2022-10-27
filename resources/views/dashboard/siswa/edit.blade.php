@@ -37,8 +37,7 @@
                 @if (old('kelas_id', $siswa->kelas_id) === $kls->id)
                     <option value="{{ $kls->id }}" selected>{{ $kls->nama_kelas }}</option>
                 @else
-                    
-                <option value="{{ $kls->id }}">{{ $kls->nama_kelas }}</option>
+                    <option value="{{ $kls->id }}">{{ $kls->nama_kelas }}</option>
                 @endif
                 @endforeach
               </select>
@@ -78,7 +77,12 @@
               <label for="jns_kelamin" class="form-label">Jenis Kelamin</label>
               <select name="jns_kelamin" id="jns_kelamin" class="form-control" required>
                 <option value="Laki-Laki" selected disabled>--Pilih Jenis Kelamin--</option>
-                  <option value="Laki-laki">Laki-laki</option>
+                @if ($siswa->jns_kelamin)
+                    <option value="{{ $siswa->jns_kelamin }}" selected>{{ $siswa->jns_kelamin  }}</option>
+                @else
+                    
+                @endif
+                <option value="Laki-laki">Laki-laki</option>
                   <option value="Perempuan">Perempuan</option>
               </select>
             </div>
@@ -158,7 +162,7 @@
 
             <div class="col-md-4">
               <label for="telp_ortu" class="form-label">Nomor HP Orang Tua</label>
-              <input type="text" class="form-control @error('telp_ortu') is-invalid @enderror" id="telp_ortu" name="telp_ortu" required value="{{ old('telp_ortu' , $siswa->telp_ortu) }}">
+              <input type="number" class="form-control @error('telp_ortu') is-invalid @enderror" id="telp_ortu" name="telp_ortu" required value="{{ old('telp_ortu' , $siswa->telp_ortu) }}">
               @error('telp_ortu')
                   <div class="invalid-feedback">
                     {{ $message }}
@@ -186,7 +190,7 @@
             </div>
 
             <div class="col-12">
-              <button type="submit" class="btn btn-primary">Simpan</button>
+              <button type="submit" class="btn btn-warning">Ubah</button>
             </div>
           </form>
       </div>
