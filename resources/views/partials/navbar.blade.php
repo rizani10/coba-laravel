@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <div class="container">
-        <a class="navbar-brand" href="/">My Blog</a>
+        <a class="navbar-brand" href="/">SMPN 2 Padang Batung</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
         </button>
@@ -60,10 +60,7 @@
               @else
 
                 <a href="/login" class="nav-link {{ ($active === 'login') ? 'active' : '' }}">
-                  <i class="bi bi-box-arrow-in-right"></i> Login Admin
-                </a>
-                <a href="" class="nav-link {{ ($active === 'login') ? 'active' : '' }}">
-                  <i class="bi bi-box-arrow-in-right"></i> Login Siswa
+                  <i class="bi bi-box-arrow-in-right"></i> Login
                 </a>
           @endauth
         </ul>

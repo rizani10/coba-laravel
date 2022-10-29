@@ -14,7 +14,7 @@
                 </h6>
 
                 <li class="nav-item">
-                    <a class="nav-link {{ Request::is('dashboard/kelas*') ? 'active' : '' }}" href="/dashboard/kelas">
+                    <a class="nav-link {{ Request::is('dashboard/ruangkelas*') ? 'active' : '' }}" href="/dashboard/ruangkelas">
                         <span data-feather="columns"></span>
                         Data Kelas
                     </a>
@@ -55,6 +55,13 @@
                     <li class="nav-item">
                         <a class="nav-link {{ Request::is('dashboard/users*') ? 'active' : '' }}" href="/dashboard/users">
                             <span data-feather="users"></span> Data Users
+                        </a>
+                    </li>
+                </ul>
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link {{ Request::is('dashboard/allpost*') ? 'active' : '' }}" href="/dashboard/allpost">
+                            <span data-feather="rss"></span> Data Semua Berita
                         </a>
                     </li>
                 </ul>

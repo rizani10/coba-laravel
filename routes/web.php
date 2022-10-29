@@ -10,6 +10,7 @@ use App\Http\Controllers\PostsController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\AdminCategoryController;
+use App\Http\Controllers\ClassController;
 use App\Http\Controllers\DashboardPostController;
 use App\Http\Controllers\KelasController;
 use App\Http\Controllers\UserManajemenController;
@@ -143,8 +144,12 @@ Route::resource('/dashboard/users', UserManajemenController::class)->middleware(
 
 Route::resource('/dashboard/siswa', SiswaController::class)->middleware('auth');
 
-Route::resource('/dashboard/kelas', KelasController::class)->middleware('auth');
+Route::resource('/dashboard/ruangkelas', KelasController::class)->middleware('auth');
 
+Route::get('/dashboard/allpost', [DashboardPostController::class, 'allpost'])->middleware('admin');
+Route::get('/dashboard/download', [SiswaController::class, 'exsport'])->middleware('admin');
+Route::post('/dashboard/prosesimport', [SiswaController::class, 'import'])->middleware('admin');
+// Route::post('/dashboard/ruangkelas/{id}', [KelasController::class, 'update'])->middleware('admin');
 
 
 

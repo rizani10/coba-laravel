@@ -36,7 +36,13 @@ class Siswa extends Model
     // relationship kelas
         public function kelas()
         {
-            return $this->belongsTo(Kelas::class);
+            return $this->belongsTo(RuangKelas::class);
+        }
+
+
+        public function kelass()
+        {
+            return $this->hasOne(RuangKelas::class);
         }
     
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use Illuminate\Support\Str;
 use App\Models\Category;
+use App\Models\Posts;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Cviebrock\EloquentSluggable\Services\SlugService;
@@ -97,6 +98,8 @@ class DashboardPostController extends Controller
      */
     public function edit(Post $post)
     {
+        // dd($post);
+
         //tampilan view buat edit
         return view('dashboard.posts.edit', [
             'post' => $post,
@@ -179,6 +182,15 @@ class DashboardPostController extends Controller
         // balikkan data slug dalam bentuk json
         return response()->json([
             'slug' => $slug
+        ]);
+    }
+
+
+    // ambil semua data postinga
+    public function allpost()
+    {
+        return view('dashboard.m_users.allpost',[
+           'posts' =>  Post::latest()->get()
         ]);
     }
 }

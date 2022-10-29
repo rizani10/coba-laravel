@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Kelas;
+use App\Models\RuangKelas;
 use App\Models\Siswa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Exports\SiswaExport;
+use App\Imports\SiswaImport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class SiswaController extends Controller
 {
@@ -29,7 +32,7 @@ class SiswaController extends Controller
     public function create()
     {
         return view('dashboard.siswa.create', [
-            'kelas' => Kelas::all(),
+            'kelas' => RuangKelas::all(),
         ]);
     }
 
@@ -88,9 +91,12 @@ class SiswaController extends Controller
      */
     public function edit(Siswa $siswa)
     {
+
+        // dd($siswa);
+
         return view('dashboard.siswa.edit', [
             'siswa' => $siswa,
-            'kelas' => Kelas::all(),
+            'kelas' => RuangKelas::all(),
         ]);
     }
 
@@ -146,12 +152,22 @@ class SiswaController extends Controller
             return redirect('/dashboard/siswa')->with('success', 'Data siswa berhasil dihapus');
     }
 
-
-    public function deleteAll()
+    public function exsport()
     {
-        DB::table('siswas')->delete();
-
-         // redirect ke halaman index sambi kirim pesan sukses
-         return redirect('/dashboard/siswa')->with('success', 'Data siswa berhasil dihapus');
+        return Excel::download(new SiswaExport, 'siswa.xlsx');
     }
+
+
+    public function import(Request $request)
+    {
+        $this->validate($request, [
+			'file' => 'required|mimes:csv,xls,xlsx'
+		]);
+ 
+        Excel::import(new SiswaImport, $request->file('file')->store('files'));
+        return redirect()->back();
+
+
+    }
+
 }

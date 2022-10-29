@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Kelas;
+use App\Models\Guru;
+use App\Models\RuangKelas;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+
 
 class KelasController extends Controller
 {
@@ -15,8 +16,8 @@ class KelasController extends Controller
      */
     public function index()
     {
-        return view('dashboard.kelas.index',[
-            'kelas' => Kelas::all()
+        return view('dashboard.kelas.index', [
+            'collection' => RuangKelas::all()
         ]);
     }
 
@@ -27,35 +28,35 @@ class KelasController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.kelas.create',[
+            'guru' => Guru::all()
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreKelasRequest  $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'nama_kelas' => 'required'
+            'class' => 'required',
+            'guru_id' => 'required'
         ]);
 
-        // insert
-        Kelas::create($validatedData);
-
-        // redirect ke halaman index sambi kirim pesan sukses
-        return redirect('/dashboard/kelas')->with('success', 'Data kelas berhasil ditambah');
+        RuangKelas::create($validatedData);
+        return redirect('/dashboard/ruangkelas')->with('success', 'Data kelas berhasil ditambah');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Kelas  $kelas
+     * @param  \App\Models\RuangKelas  $ruangKelas
      * @return \Illuminate\Http\Response
      */
-    public function show(Kelas $kelas)
+    public function show(RuangKelas $ruangKelas)
     {
         //
     }
@@ -63,34 +64,44 @@ class KelasController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Kelas  $kelas
+     * @param  \App\Models\RuangKelas  $ruangKelas
      * @return \Illuminate\Http\Response
      */
-    public function edit(Kelas $kelas)
+    public function edit($id)
     {
-        //
+        $kelas = RuangKelas::find($id);
+        return view('dashboard.kelas.edit', [
+            'kelas' => $kelas,
+            'guru' => Guru::all()
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateKelasRequest  $request
-     * @param  \App\Models\Kelas  $kelas
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\RuangKelas  $ruangKelas
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Kelas $kelas)
+    public function update(Request $request, $id)
     {
-        //
+        RuangKelas::find($id)->update($request->all());
+
+        return redirect('/dashboard/ruangkelas')->with('success', 'Data kelas berhasil diubah');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Kelas  $kelas
+     * @param  \App\Models\RuangKelas  $ruangKelas
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Kelas $kelas)
+    public function destroy($id)
     {
-        //
+        $ruangKelas = RuangKelas::findOrFail($id);
+        $ruangKelas->delete();
+
+         // redirect ke halaman index sambi kirim pesan sukses
+        return redirect('/dashboard/ruangkelas')->with('success', 'Data kelas berhasil dihapus');
     }
 }

@@ -35,9 +35,9 @@
                 <option value="1" selected disabled>--Pilih Kelas--</option>
                 @foreach ($kelas as $kls)
                 @if (old('kelas_id', $siswa->kelas_id) === $kls->id)
-                    <option value="{{ $kls->id }}" selected>{{ $kls->nama_kelas }}</option>
+                    <option value="{{ $kls->id }}" selected>{{ $kls->class }}</option>
                 @else
-                    <option value="{{ $kls->id }}">{{ $kls->nama_kelas }}</option>
+                    <option value="{{ $kls->id }}">{{ $kls->class }}</option>
                 @endif
                 @endforeach
               </select>
@@ -91,8 +91,13 @@
               <label for="agama" class="form-label">Agama</label>
               <select name="agama" id="agama" class="form-control" required>
                 <option value="Islam" selected disabled>--Pilih Agama--</option>
+                @if ($siswa->agama)
+                    <option value="{{ $siswa->agama }}" selected>{{ $siswa->agama }}</option>
+                @else
+                    
+                @endif
                 <option value="Islam">Islam</option>
-                <option value="Kristem">Kristem</option>
+                <option value="Kristen">Kristen</option>
                 <option value="Hindu">Hindu</option>
                 <option value="Budha">Budha</option>
                 <option value="Kunghocu">Kunghocu</option>
