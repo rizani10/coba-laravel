@@ -2,10 +2,10 @@
 
 @section('container')
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-1 pb-1 mb-3 border-bottom">
-        <h1 class="h2">Data Kelas</h1>
+        <h1 class="h2">Data Mapel</h1>
     </div>
 
-    <a href="/dashboard/ruangkelas/create"  class="btn btn-primary mb-3"> <span data-feather="plus-circle"></span> Tambah</a>
+    <a href="/dashboard/mapel/create"  class="btn btn-primary mb-3"> <span data-feather="plus-circle"></span> Tambah</a>
     
     
 
@@ -22,7 +22,7 @@
     {{-- ambil semua data posts dalam bentuk tabel --}}
     <div class="card col-lg-8">
         <div class="card-header text-white  bg-success">
-            Tabel Data Kelas
+            Tabel Data Mapel
         </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -30,8 +30,8 @@
                         <thead>
                             <tr>
                             <th scope="col">#</th>
-                            <th scope="col">Nama Kelas</th>
-                            <th scope="col">Nama Wali Kelas</th>
+                            <th scope="col">Mata Pelajaran</th>
+                            <th scope="col">Guru Pengajar</th>
                             <th scope="col">Aksi</th>
                             </tr>
                         </thead>
@@ -39,13 +39,13 @@
                             @foreach ($collection as $item)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $item->class }}</td>
-                                    <td>{{ !empty($item->guru) ? $item->guru->nama : '' }}</td>
+                                    <td>{{ $item->mapel }}</td>
+                                    <td>{{ $item->guru->nama }}</td>
                                     <td>
-                                        <a href="/dashboard/ruangkelas/{{ $item->id }}/edit" class="badge bg-warning">
+                                        <a href="/dashboard/mapel/{{ $item->id }}/edit" class="badge bg-warning">
                                             <span data-feather="edit"></span>
                                         </a>
-                                        <form action="/dashboard/ruangkelas/{{ $item->id }}" method="post" class="d-inline">
+                                        <form action="/dashboard/mapel/{{ $item->id }}" method="post" class="d-inline">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="badge bg-danger border-0" onclick="return confirm('Yakin ingin menghapus data')">

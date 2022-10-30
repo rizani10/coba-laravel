@@ -7,6 +7,8 @@ use App\Models\Siswa;
 use App\Models\User;
 use App\Models\Category;
 use App\Models\Guru;
+use App\Models\Mapel;
+use App\Models\Nilai;
 use App\Models\RuangKelas;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -25,7 +27,7 @@ class DatabaseSeeder extends Seeder
 
 
 
-        // seeding
+        // // seeding
         User::create([
             'name' => 'Muhammad Faisal Rizani',
             'username' => 'Rizani12',
@@ -35,6 +37,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Guru::factory(50)->create();
+        Mapel::factory(5)->create();
 
         RuangKelas::create([
             'guru_id'   => 3,
@@ -70,8 +73,8 @@ class DatabaseSeeder extends Seeder
         ]);
 
         // membuat post dengan factory
-        Post::factory(100)->create();
+        // Post::factory(100)->create();
 
-        Siswa::factory(200)->create();
+        // Siswa::factory(100)->create();
     }
 }

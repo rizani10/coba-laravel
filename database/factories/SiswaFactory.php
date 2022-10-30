@@ -30,7 +30,7 @@ class SiswaFactory extends Factory
             'telp_ortu' => $this->faker->randomNumber(8, true),
             'pekerjaan_ayah' => $this->faker->jobTitle(),
             'pekerjaan_ibu' => $this->faker->jobTitle(),
-            'kelas_id' => mt_rand(1, 3)
+            'kelas_id' => mt_rand(1, 3),
         ]; 
     }
 }

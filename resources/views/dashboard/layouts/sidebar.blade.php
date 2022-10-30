@@ -27,6 +27,27 @@
                     </a>
                 </li>
 
+                <li class="nav-item">
+                    <a class="nav-link {{ Request::is('dashboard/guru*') ? 'active' : '' }}" href="/dashboard/guru">
+                        <span data-feather="users"></span>
+                        Data Guru
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link {{ Request::is('dashboard/mapel*') ? 'active' : '' }}" href="/dashboard/mapel">
+                        <span data-feather="book"></span>
+                        Data Mapel
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link {{ Request::is('dashboard/nilai*') ? 'active' : '' }}" href="/dashboard/nilai">
+                        <span data-feather="slack"></span>
+                        Data Nilai
+                    </a>
+                </li>
+
                 <h6 class="sidebar-heading d-flex justify-content-between align-items-center p-3 mb-1 text-muted">
                     <span>Berita</span>
                 </h6>
@@ -39,7 +60,7 @@
                 </li>
             </ul>
 
-            {{-- cek jika yang login ini admin tampilkan jika tidak jangan dengan gate --}}
+            cek jika yang login ini admin tampilkan jika tidak jangan dengan gate
             @can('admin')
                 <h6 class="sidebar-heading d-flex justify-content-between align-items-center p-3 mt-3 mb-1 text-muted">
                     <span>Administrator</span>

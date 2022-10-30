@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Exports\SiswaExport;
 use App\Imports\SiswaImport;
+use App\Models\Nilai;
 use Maatwebsite\Excel\Facades\Excel;
 
 class SiswaController extends Controller
@@ -165,9 +166,20 @@ class SiswaController extends Controller
 		]);
  
         Excel::import(new SiswaImport, $request->file('file')->store('files'));
-        return redirect()->back();
+        // redirect ke halaman index sambi kirim pesan sukses
+        return redirect('/dashboard/siswa')->with('success', 'Data siswa berhasil dihapus');
+    }
 
 
+
+    public function nilai($id)
+    {
+        $nilai = Siswa::FindOrFail($id);
+        // dd($nilai);
+        return view('dashboard.nilai.show', [
+            'siswa' => $nilai,
+            // 'nilai' => Nilai::where('id')->on($id)
+        ]);
     }
 
 }

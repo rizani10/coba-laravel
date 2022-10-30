@@ -11,7 +11,7 @@ class SiswaImport implements ToModel, WithHeadingRow
 {
 
 
-    private $kelass;
+    private $kelas_id;
     
     public function __construct()
     {
@@ -26,15 +26,15 @@ class SiswaImport implements ToModel, WithHeadingRow
     */
     public function model(array $row)
     {
-        $kelas = $this->kelass->where('kelas', $row['class'])->first();
+        $siswa = $this->kelas->where('class', $row['kelas'])->first();
         return new Siswa([
-            'kelas_id' => $kelas->id ?? null,
+            'kelas_id' => $siswa->id ?? null,
             'nis' => $row['nis'],
             'nisn' => $row['nisn'],
             'nama' => $row['nama'],
             'kelas' => $row['kelas'],
             'tempat_lahir' => $row['tempat_lahir'],
-            'tgl_lahir' => $row[date('tgl_lahir')],
+            'tgl_lahir' => date($row['tgl_lahir']),
             'jns_kelamin' => $row['jns_kelamin'],
             'agama' => $row['agama'],
             'telp' => $row['telp'],
@@ -43,6 +43,7 @@ class SiswaImport implements ToModel, WithHeadingRow
             'nama_ibu' => $row['nama_ibu'],
             'nama_ayah' => $row['nama_ayah'],
             'telp_ortu' => $row['telp_ortu'],
+            'alamat' => $row['alamat'],
             'pekerjaan_ayah' => $row['pekerjaan_ayah'],
             'pekerjaan_ibu' => $row['pekerjaan_ibu'],
         ]);

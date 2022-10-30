@@ -19,9 +19,9 @@ class IsAdmin
     public function handle(Request $request, Closure $next)
     {
         // cek jika sudah login atau belum
-        if (auth()->guest()) {
-            abort(403, 'Unauthorized action.');
-        }
+        // if (auth()->guest()) {
+        //     abort(403, 'Unauthorized action.');
+        // }
 
         // jika sudah login tapi bukan admin
         if (!auth()->user()->is_admin) {
