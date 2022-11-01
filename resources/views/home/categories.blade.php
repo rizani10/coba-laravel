@@ -1,6 +1,9 @@
-@extends('layouts.app')
+@extends('home.layout.app')
 @section('content')
-<h1 class="mb-5">Post categories</h1>
+
+<div class="container marketing">
+
+    <h1 class="mb-3 mt-4 text-center">{{ $title }}</h1>
 
 
     {{-- card overlay --}}
@@ -20,6 +23,8 @@
             @endforeach
         </div>
     </div>
+    <hr class="featurette-divider">
+</div>
     {{-- card overlay --}}
 
 @endsection

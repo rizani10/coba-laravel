@@ -1,10 +1,11 @@
-@extends('layouts.app')
-
+@extends('home.layout.app')
 @section('content')
+
+<div class="container marketing">
 
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-5">
+            <div class="col-md-5 mt-5">
 
                
 
@@ -17,7 +18,7 @@
                 @endif
 
                 <main class="form-signin">
-                    <h1 class="h3 mb-3 fw-normal text-center">Please Login</h1>
+                    <h1 class="h3 mb-3 fw-normal text-center">Silahkan Login</h1>
                     
                      {{-- flash data --}}
                 @if (session()->has('status'))
@@ -57,7 +58,7 @@
                 </main>
             </div>
         </div>
+        <hr class="featurette-divider">
     </div>
-
-
+</div>
 @endsection

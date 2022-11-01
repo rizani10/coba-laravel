@@ -1,44 +1,9 @@
-{{-- 
-@extends('home.layout.app')
-@section('content')
-    <div class="row g-5 mt-3">
-      <div class="col-md-8">
-
-        <article class="blog-post">
-          <h2 class="blog-post-title">{{ $post->title }}</h2>
-          <p class="blog-post-meta">{{ $post->created_at->diffForHumans() }} Oleh: <a href="#">{{ $post->author->name }}</a> Kategori: <a href="#">{{ $post->category->name }}</a></p>
-
-          
-              @if ($post->image)
-                <div style="max-height: 350px; overflow:hidden;">
-                  <img src="{{ asset('storage/' . $post->image) }}" class="card-img-top" alt="{{ $post->title }}" class="img-fluid">
-                 </div>
-              @else
-                 <img src="https://source.unsplash.com/1200x400?{{ $post->category->name }}" class="card-img-top mt-3" alt="{{ $post->category->name }}" class="img-fluid">
-              @endif         
-
-            <article class="my-3 fs-5">
-              {!! $post->body !!}
-        </article>
-
-      </div>
-
-      <div class="col-md-4">
-        <div class="position-sticky" style="top: 2rem;">
-
-          <div class="p-4">
-            <h4 class="fst-italic">Archives</h4>
-          </div>
-        </div>
-      </div>
-    </div>
-@endsection --}}
 
 @extends('home.layout.app')
 @section('content')
   
-    <div class="container">
-      <div class="row mt-5">
+<div class="container marketing">
+      <div class="row mt-5 mb-3">
         <div class="col-lg-8">
           <article class="blog-post">
             <h2 class="blog-post-title">{{ $post->title }}</h2>
@@ -86,5 +51,8 @@
         </div>
       </div>
     </div>
+
+    <hr class="featurette-divider">
+</div>
 
 @endsection

@@ -20,7 +20,8 @@ use App\Http\Controllers\NilaiPengetahuanController;
 use App\Http\Controllers\NilaiUtsController;
 use App\Http\Controllers\SiswaBaruController;
 use App\Http\Controllers\UserManajemenController;
-
+use App\Models\Guru;
+use App\Models\Siswa;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,9 +42,11 @@ use App\Http\Controllers\UserManajemenController;
 // });
 
 Route::get('/', function(){
-    return view('home.layout.app',[
+    return view('home.index',[
         'title' => 'Home',
-        'active' => 'home'
+        'active' => 'home',
+        'siswa' => Siswa::count(),
+        'guru' => Guru::count()
     ]);
 });
 
@@ -73,7 +76,7 @@ Route::get('posts/{post:slug}', [PostsController::class, 'singlePost']);
 // halaman semua category
 Route::get('categories', function () {
     $categories = Category::all();
-    return view('categories', [
+    return view('home.categories', [
         'title' => 'Categories',
         'active' => 'categories',
         'categories' => $categories
@@ -99,7 +102,7 @@ Route::get('categories/{category:slug}', function (Category $category) {
 // get data in authors
 Route::get('authors', function () {
     $authors = User::all();
-    return view('authors', [
+    return view('home.authors', [
         'title' => 'Authors Blog',
         'authors' => $authors,
         'active' => 'authors'
@@ -170,7 +173,6 @@ Route::get('/dashboard/downloadguru', [GuruController::class, 'export'])->middle
 
 
 Route::resource('/dashboard/newstudent', SiswaBaruController::class)->middleware('auth');
-// Route::post('/dashboard/newstudent/update', [SiswaBaruController::class, 'update'])->middleware('auth');
 Route::get('/ppdb', [SiswaBaruController::class, 'create']);
 Route::post('/dashboard/insertppdb', [SiswaBaruController::class, 'insert']);
 Route::get('/home/ppdb-sukses', [SiswaBaruController::class, 'sukses']);
