@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
+use App\Models\Posts;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -87,7 +89,26 @@ class UserManajemenController extends Controller
         $user->delete($user->id);
 
         // /redirect ke halaman index dan kirim pesan
-        return redirect('/dashboard/users')->with('success', 'User deleted successfully');
+        return redirect('/dashboard/users')->with('success', 'Data user berhasil dihapus');
 
+    }
+
+    public function allpost()
+    {
+        return view('dashboard.m_users.allpost',[
+           'posts' =>  Post::latest()->get()
+        ]);
+    }
+
+
+
+    public function hapusAllPost(Post $slug)
+    {
+        $post = Post::findOrFail($slug);
+        // $post = Post::where('slug', $slug)->where('user_id', $user_id)->first();
+        $post->delete();
+        return parent::delete();
+                // /redirect ke halaman index dan kirim pesan
+                return redirect('/dashboard/allpost')->with('success', 'Data user berhasil dihapus');
     }
 }

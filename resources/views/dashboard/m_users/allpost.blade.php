@@ -4,9 +4,6 @@
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">Data Semua Postingan berita</h1>
     </div>
-
-
-    {{-- pesan post baru berhasil ditambah --}}
     @if (session()->has('success'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
             {{ session()->get('success') }}
@@ -36,21 +33,18 @@
                         @foreach ($posts as $post)
                         
                             <tr>
-                                {{-- td pertama dengan loop iteration untuk menghitung angka mulai dari 1 --}}
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $post->title }}</td>
                                 <td>{{ !empty($post->category) ?  $post->category->name: '' }}</td>
                                 <td>{{ $post->author->name }}</td>
                                 <td>{{ $post->created_at }}</td>
                                 <td>
-
-                                    <form action="/dashboard/posts/{{ $post->slug }}" method="POST" class="d-inline">
-                                        {{-- request method bajak ke delete --}}
-                                        @method('DELETE')
-                                        {{-- token untuk menghindari CSRF --}}
+                                    <form action="/dashboard/allpost/hapus/{{ $post->slug }}" method="post" class="d-inline">
                                         @csrf
-                                        {{-- tombol hapus --}}
-                                        <button class="badge bg-danger border-0" onclick="return confirm('Yakin ingin menghapus postingan ?'"><span data-feather="trash"></span></button>
+                                        @method('DELETE')
+                                        <button type="submit" class="badge bg-danger border-0" onclick="return confirm('Yakin ingin menghapus data')">
+                                            <span data-feather="trash"></span>
+                                        </button>
                                     </form>
                                 </td>
                             </tr>

@@ -59,7 +59,9 @@
           <h4 class="alert-heading">Selamat</h4>
           <p>{{ session()->get('success') }}</p>
           <hr>
-          <p class="mb-0">Silahkan cetak kartu</p>
+          <p class="mb-0">
+            Silahkan cetak kartu
+          </p>
         </div>
       </div>
 

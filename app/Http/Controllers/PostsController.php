@@ -26,15 +26,6 @@ class PostsController extends Controller
             $title = ' in ' . $author->name ;
         }
 
-
-        // return view('posts', [
-        //     "title" => "All Posts" . $title,
-        //     "active" => 'posts',
-        //     // "posts" => Post::all()
-        //     // membuat postingan terbaru
-        //     "posts" => Post::latest()->filter(request(['search', 'category', 'author']))->paginate(7)
-        // ]);
-
         return view('home.blog',[
             "title" => "All Posts" . $title,
             "active" => 'posts',

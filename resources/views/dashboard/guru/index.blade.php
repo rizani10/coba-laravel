@@ -11,9 +11,9 @@
         <span data-feather="download"></span> Download
     </a>
 
-    {{-- <a href="#" class="btn btn-success mb-3" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+    <a href="#" class="btn btn-success mb-3" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
        <span data-feather="upload"></span> Import Excel
-    </a> --}}
+    </a>
 
     {{-- pesan post baru berhasil ditambah --}}
     @if (session()->has('success'))
@@ -56,6 +56,9 @@
                                     <td>{{ $item->tgl_lahir }}</td>
                                     <td>{{ $item->jabatan }}</td>
                                     <td>
+                                        <a href="/dashboard/guru/{{ $item->id }}" class="badge bg-info">
+                                            <span data-feather="eye"></span>
+                                        </a>
                                         <a href="/dashboard/guru/{{ $item->id }}/edit" class="badge bg-warning">
                                             <span data-feather="edit"></span>
                                         </a>
@@ -78,7 +81,7 @@
     
 
     <!-- Modal -->
-    {{-- <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
@@ -86,7 +89,7 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form class="row g-3" method="POST" enctype="multipart/form-data" action="/dashboard/prosesimport">
+                <form class="row g-3" method="POST" enctype="multipart/form-data" action="/dashboard/prosesimportguru">
                     @csrf
                     <div class="mb-3">
                         <label for="file" class="form-label">Pilih File</label>
@@ -100,6 +103,6 @@
             </div>
         </div>
         </div>
-    </div> --}}
+    </div>
 
 @endsection

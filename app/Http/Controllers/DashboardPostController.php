@@ -186,11 +186,6 @@ class DashboardPostController extends Controller
     }
 
 
-    // ambil semua data postinga
-    public function allpost()
-    {
-        return view('dashboard.m_users.allpost',[
-           'posts' =>  Post::latest()->get()
-        ]);
-    }
+
+
 }

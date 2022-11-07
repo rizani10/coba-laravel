@@ -9,7 +9,6 @@
 
     <a href="/" class="btn btn-secondary mb-3"><span data-feather="globe"></span> Visit Blog</a>
 
-    {{-- pesan post baru berhasil ditambah --}}
     @if (session()->has('success'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
             {{ session()->get('success') }}
@@ -17,7 +16,6 @@
         </div>
     @endif
 
-    {{-- ambil semua data posts dalam bentuk tabel --}}
     <div class="table-responsive">
         <table class="table table-striped table-sm" id="example">
             <thead>
@@ -32,7 +30,6 @@
                 @foreach ($posts as $post)
                 
                     <tr>
-                        {{-- td pertama dengan loop iteration untuk menghitung angka mulai dari 1 --}}
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $post->title }}</td>
                         <td>{{ !empty($post->category) ?  $post->category->name: '' }}</td>
@@ -46,11 +43,8 @@
                             </a>
 
                             <form action="/dashboard/posts/{{ $post->slug }}" method="POST" class="d-inline">
-                                {{-- request method bajak ke delete --}}
                                 @method('DELETE')
-                                {{-- token untuk menghindari CSRF --}}
                                 @csrf
-                                {{-- tombol hapus --}}
                                 <button class="badge bg-danger border-0" onclick="return confirm('Are you sure delete')"><span data-feather="trash"></span></button>
                             </form>
                         </td>

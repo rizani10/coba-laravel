@@ -81,7 +81,9 @@ class SiswaController extends Controller
      */
     public function show(Siswa $siswa)
     {
-        //
+        return view('dashboard.siswa.show', [
+            'siswa' => $siswa
+        ]);
     }
 
     /**
@@ -172,14 +174,6 @@ class SiswaController extends Controller
 
 
 
-    public function nilai($id)
-    {
-        $nilai = Siswa::FindOrFail($id);
-        // dd($nilai);
-        return view('dashboard.nilai.show', [
-            'siswa' => $nilai,
-            // 'nilai' => Nilai::where('id')->on($id)
-        ]);
-    }
+
 
 }

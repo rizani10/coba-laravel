@@ -17,11 +17,8 @@
                 </a>
 
                 <form action="/dashboard/posts/{{ $post->slug }}" method="POST" class="d-inline">
-                    {{-- request method bajak ke delete --}}
                     @method('DELETE')
-                    {{-- token untuk menghindari CSRF --}}
                     @csrf
-                    {{-- tombol hapus --}}
                     <button class="btn btn-danger" onclick="return confirm('Are you sure delete')"><span data-feather="trash"></span> Delete</button>
                 </form>
 

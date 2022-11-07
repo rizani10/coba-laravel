@@ -9,11 +9,7 @@ use Illuminate\Http\Request;
 
 class KelasController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         return view('dashboard.kelas.index', [
@@ -21,11 +17,6 @@ class KelasController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         return view('dashboard.kelas.create',[
@@ -33,12 +24,7 @@ class KelasController extends Controller
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(Request $request)
     {
         $validatedData = $request->validate([
@@ -50,23 +36,7 @@ class KelasController extends Controller
         return redirect('/dashboard/ruangkelas')->with('success', 'Data kelas berhasil ditambah');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\RuangKelas  $ruangKelas
-     * @return \Illuminate\Http\Response
-     */
-    public function show(RuangKelas $ruangKelas)
-    {
-        //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\RuangKelas  $ruangKelas
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         $kelas = RuangKelas::find($id);
@@ -76,13 +46,6 @@ class KelasController extends Controller
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\RuangKelas  $ruangKelas
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         RuangKelas::find($id)->update($request->all());
@@ -90,12 +53,7 @@ class KelasController extends Controller
         return redirect('/dashboard/ruangkelas')->with('success', 'Data kelas berhasil diubah');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\RuangKelas  $ruangKelas
-     * @return \Illuminate\Http\Response
-     */
+
     public function destroy($id)
     {
         $ruangKelas = RuangKelas::findOrFail($id);

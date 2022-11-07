@@ -15,7 +15,6 @@
        <span data-feather="upload"></span> Import Excel
     </a>
 
-    {{-- pesan post baru berhasil ditambah --}}
     @if (session()->has('success'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
             {{ session()->get('success') }}
@@ -23,7 +22,6 @@
         </div>
     @endif
 
-    {{-- ambil semua data posts dalam bentuk tabel --}}
     <div class="card">
         <div class="card-header">
             Tabel Data Siswa
@@ -41,7 +39,6 @@
                             <th scope="col">Tanggal Lahir</th>
                             <th scope="col">Nama Ibu</th>
                             <th scope="col">Aksi</th>
-                            {{-- <th scope="col">Nilai</th> --}}
                             </tr>
                         </thead>
                         <tbody>
@@ -55,6 +52,9 @@
                                     <td>{{ $siswa->tgl_lahir }}</td>
                                     <td>{{ $siswa->nama_ibu }}</td>
                                     <td>
+                                        <a href="/dashboard/siswa/{{ $siswa->id }}" class="badge bg-info">
+                                            <span data-feather="eye"></span>
+                                        </a>
                                         <a href="/dashboard/siswa/{{ $siswa->id }}/edit" class="badge bg-warning">
                                             <span data-feather="edit"></span>
                                         </a>
@@ -66,11 +66,6 @@
                                             </button>
                                         </form>
                                     </td>
-                                    {{-- <td>
-                                        <a href="/dashboard/siswa/nilai/{{ $siswa->id }}" class="badge bg-secondary">
-                                            <span data-feather="eye"></span>
-                                        </a>
-                                    </td> --}}
                                 </tr>
                             @endforeach
                         </tbody>

@@ -8,7 +8,6 @@
         <div class="col-lg-8">
             
             <form method="POST" action="/dashboard/posts/{{ $post->slug }}" enctype="multipart/form-data">
-                {{-- bajak method baut update --}}
                 @method('PUT')
                 @csrf
                 <div class="mb-3">
@@ -78,9 +77,9 @@
 
         </div>
 
-        {{-- script untuk membuat inputan slug otomatis menggunakan fetch api javascript --}}
-        {{-- script untuk membuat inputan slug otomatis menggunakan fetch api javascript --}}
         <script>
+            // {{-- script untuk membuat inputan slug otomatis menggunakan fetch api javascript --}}
+            // {{-- script untuk membuat inputan slug otomatis menggunakan fetch api javascript --}}
             
             const title = document.querySelector('#title');
             const slug = document.querySelector('#slug');

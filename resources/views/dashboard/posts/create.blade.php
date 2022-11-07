@@ -3,7 +3,7 @@
 @section('container')
 
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Create My Posts, {{ auth()->user()->name }}</h1>
+        <h1 class="h2">Buat berita, {{ auth()->user()->name }}</h1>
     </div>
         <div class="col-lg-8">
             
@@ -69,10 +69,7 @@
 
         </div>
 
-        
-        {{-- script untuk membuat inputan slug otomatis menggunakan fetch api javascript --}}
         <script>
-            
                 const title = document.querySelector('#title');
                 const slug = document.querySelector('#slug');
 

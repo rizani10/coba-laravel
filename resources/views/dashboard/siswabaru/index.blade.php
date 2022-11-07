@@ -7,9 +7,6 @@
 
     <a href="/ppdb"  class="btn btn-primary mb-3" target="blank"> <span data-feather="plus-circle"></span> Tambah</a>
     
-    
-
-    {{-- pesan post baru berhasil ditambah --}}
     <div class="col-lg-12">
         @if (session()->has('success'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -19,7 +16,6 @@
         @endif
     </div>
 
-    {{-- ambil semua data posts dalam bentuk tabel --}}
     <div class="card col-lg-12">
         <div class="card-header">
             Tabel Data Siswa Baru
@@ -36,6 +32,7 @@
                             <th scope="col">NISN</th>
                             <th scope="col">Nama Ibu</th>
                             <th scope="col">Aksi</th>
+                            <th scope="col">Kartu Pendaftaran</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -62,6 +59,11 @@
                                                 <span data-feather="trash"></span>
                                             </button>
                                         </form>
+                                    </td>
+                                    <td>
+                                        <a href="/dashboard/cetakkartu/{{ $item->id }}" class="badge bg-primary">
+                                            <span data-feather="file-text"></span>  Cetak
+                                        </a>
                                     </td>
                                 </tr>
                             @endforeach

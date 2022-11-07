@@ -6,10 +6,7 @@
     </div>
 
     <a href="/dashboard/ruangkelas/create"  class="btn btn-primary mb-3"> <span data-feather="plus-circle"></span> Tambah</a>
-    
-    
 
-    {{-- pesan post baru berhasil ditambah --}}
     <div class="col-lg-8">
         @if (session()->has('success'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -19,7 +16,6 @@
         @endif
     </div>
 
-    {{-- ambil semua data posts dalam bentuk tabel --}}
     <div class="card col-lg-8">
         <div class="card-header text-white  bg-success">
             Tabel Data Kelas

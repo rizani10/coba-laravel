@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\SiswaBaru;
-use App\Http\Requests\StoreSiswaBaruRequest;
-use App\Http\Requests\UpdateSiswaBaruRequest;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
+use PhpOffice\PhpSpreadsheet\Writer\Pdf as WriterPdf;
 
 class SiswaBaruController extends Controller
 {
@@ -43,6 +43,8 @@ class SiswaBaruController extends Controller
      */
     public function insert(Request $request)
     {
+
+
         $validatedData = $request->validate([
             'no_pendaftaran' => 'required',
             'nisn' => 'required|unique:siswa_barus',
@@ -63,9 +65,14 @@ class SiswaBaruController extends Controller
             'pekerjaan_ibu'=> 'required',
             'telp_ortu'=> 'required',
         ]);
-
-        // insert
-        SiswaBaru::create($validatedData);
+        
+        if ($request->session->put($validatedData)) {
+            echo $request->session()->get($validatedData);
+        } 
+        
+                
+                // insert
+                SiswaBaru::create($validatedData);
 
          // redirect ke halaman index sambi kirim pesan sukses
         return redirect('/home/ppdb-sukses')->with('success', 'Pendaftaran kamu berhasil');
@@ -77,9 +84,12 @@ class SiswaBaruController extends Controller
      * @param  \App\Models\SiswaBaru  $siswaBaru
      * @return \Illuminate\Http\Response
      */
-    public function show(SiswaBaru $siswaBaru)
+    public function show($id)
     {
-        //
+        $siswaBaru = SiswaBaru::FindOrFail($id);
+        return view('dashboard.siswabaru.show', [
+            'siswabaru' => $siswaBaru
+        ]);
     }
 
     /**
@@ -150,6 +160,20 @@ class SiswaBaruController extends Controller
 
     public function sukses()
     {
+
+        
+
         return view('home.ppdb-sukses');
+    }
+
+    public function cetakpdf($id)
+    {
+
+        $siswaBaru = SiswaBaru::FindOrFail($id);
+
+        $pdf = PDF::loadView('dashboard.siswabaru.cetak-pdf',[
+            'siswabaru' => $siswaBaru
+        ]);
+        return $pdf->download('kartuppdf.pdf');
     }
 }

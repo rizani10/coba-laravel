@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Exports\GuruExport;
+use App\Imports\GuruImport;
 use App\Models\Guru;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
@@ -68,7 +69,9 @@ class GuruController extends Controller
      */
     public function show(Guru $guru)
     {
-        //
+        return view('dashboard.guru.show', [
+            'guru' => $guru
+        ]);
     }
 
     /**
@@ -132,8 +135,20 @@ class GuruController extends Controller
     }
 
 
-    public function export()
+    public function exportGuru()
     {
         return Excel::download(new GuruExport, 'guru.xlsx');
+    }
+
+
+    public function importGuru(Request $request)
+    {
+        $this->validate($request, [
+			'file' => 'required|mimes:csv,xls,xlsx'
+		]);
+ 
+        Excel::import(new GuruImport, $request->file('file')->store('files'));
+        // redirect ke halaman index sambi kirim pesan sukses
+        return redirect('/dashboard/guru')->with('success', 'Data guru berhasil diimport');
     }
 }

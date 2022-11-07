@@ -8,7 +8,6 @@
         <div class="col-lg-8">
             
             <form method="POST" action="/dashboard/categories/{{ $category->id }}" class="mb-5">
-                {{-- bajak method --}}
                 @method('PUT')
                 @csrf
                 <div class="mb-3">
@@ -35,8 +34,8 @@
 
         </div>
 
-        {{-- script untuk membuat inputan slug otomatis menggunakan fetch api javascript --}}
         <script>
+            // {{-- script untuk membuat inputan slug otomatis menggunakan fetch api javascript --}}
             
             const name = document.querySelector('#name');
             const slug = document.querySelector('#slug');

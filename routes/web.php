@@ -21,6 +21,7 @@ use App\Http\Controllers\NilaiUtsController;
 use App\Http\Controllers\SiswaBaruController;
 use App\Http\Controllers\UserManajemenController;
 use App\Models\Guru;
+use App\Models\RuangKelas;
 use App\Models\Siswa;
 
 /*
@@ -126,9 +127,10 @@ Route::post('/login' , [LoginController::class, 'authenticate']);
 Route::get('/dashboard' , function() {
     return view('dashboard.index',[
         //hitung jumlah data di database
-        'total_post' => Post::count(),
-        'total_category' => Category::count(),
-        'total_author' => User::count(),
+        'total_post'    => Post::count(),
+        'siswa'         => Siswa::count(),
+        'guru'          => Guru::count(),
+        'ruang_kelas'   => RuangKelas::count()
     ]);
 })->middleware('auth');
 
@@ -155,29 +157,32 @@ Route::resource('/dashboard/siswa', SiswaController::class)->middleware('auth');
 
 Route::resource('/dashboard/ruangkelas', KelasController::class)->middleware('auth');
 
-Route::get('/dashboard/allpost', [DashboardPostController::class, 'allpost'])->middleware('admin');
+Route::get('/dashboard/allpost', [UserManajemenController::class, 'allpost'])->middleware('admin');
 
-Route::get('/dashboard/download', [SiswaController::class, 'exsport'])->middleware('admin');
+Route::post('/dashboard/allpost/hapus/{post:slug}', [UserManajemenController::class, 'hapusAllPost'])->middleware('admin');
+
+Route::get('/dashboard/download', [SiswaController::class, 'exsport'])->middleware('auth');
 
 Route::post('/dashboard/prosesimport', [SiswaController::class, 'import'])->middleware('admin');
+
 
 Route::resource('/dashboard/mapel', MapelController::class)->middleware('auth');
 
 Route::resource('/dashboard/guru', GuruController::class)->middleware('auth');
 
-Route::get('/dashboard/downloadguru', [GuruController::class, 'export'])->middleware('auth');
+Route::get('/dashboard/downloadguru', [GuruController::class, 'exportguru'])->middleware('auth');
 
-
-
-
-
+Route::post('/dashboard/prosesimportguru', [GuruController::class, 'importGuru'])->middleware('auth');
 
 Route::resource('/dashboard/newstudent', SiswaBaruController::class)->middleware('auth');
+
 Route::get('/ppdb', [SiswaBaruController::class, 'create']);
+
 Route::post('/dashboard/insertppdb', [SiswaBaruController::class, 'insert']);
+
 Route::get('/home/ppdb-sukses', [SiswaBaruController::class, 'sukses']);
-// Route::get('/dashboard/siswa/nilai/{id}',[SiswaController::class, 'nilai']);
-// Route::post('/dashboard/ruangkelas/{id}', [KelasController::class, 'update'])->middleware('admin');
+
+Route::get('/dashboard/cetakkartu/{siswabaru:id}', [SiswaBaruController::class, 'cetakpdf']);
 
 
 

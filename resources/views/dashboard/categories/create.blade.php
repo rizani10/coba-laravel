@@ -6,7 +6,6 @@
         <h1 class="h2">Create Categories</h1>
     </div>
         <div class="col-lg-8">
-            
             <form method="POST" action="/dashboard/categories" class="mb-5">
                 @csrf
                 <div class="mb-3">
@@ -18,7 +17,6 @@
                         </div>
                     @enderror
                 </div>
-                
                 <div class="mb-3">
                     <label for="slug" class="form-label">Slug</label>
                     <input type="text" class="form-control @error('slug') is-invalid @enderror" id="slug" name="slug" value="{{ old('slug') }}">
@@ -33,9 +31,8 @@
 
         </div>
 
-        {{-- script untuk membuat inputan slug otomatis menggunakan fetch api javascript --}}
-        <script>
-            
+        <script> 
+            // {{-- script untuk membuat inputan slug otomatis menggunakan fetch api javascript --}}
             const name = document.querySelector('#name');
             const slug = document.querySelector('#slug');
 
